@@ -1,5 +1,8 @@
 # Simple Python Singleton pattern
 
+![PyPI package](https://github.com/mammo0/py-simple-singleton/workflows/PyPI%20package/badge.svg)
+[![PyPI version](https://badge.fury.io/py/simple-singleton.svg)](https://badge.fury.io/py/simple-singleton)
+
 This module provides a simple way to define a class as a singleton.
 
 
