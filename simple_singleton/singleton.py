@@ -12,13 +12,13 @@ class _SingletonMeta(type):
         super(_SingletonMeta, cls).__init__(name, bases, dct)
 
         # this variable holds the singleton instance
-        cls.instance = None
+        cls._instance = None
 
     def __call__(cls, *args, **kwargs):
         # check if there's already an instance
-        if cls.instance is None:
+        if cls._instance is None:
             # if not create one
-            cls.instance = super(_SingletonMeta, cls).__call__(*args, **kwargs)
+            cls._instance = super(_SingletonMeta, cls).__call__(*args, **kwargs)
 
         # return the instance
-        return cls.instance
+        return cls._instance
