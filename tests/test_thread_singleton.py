@@ -25,11 +25,19 @@ def custom_trace(frame, event, arg):
     return custom_trace
 
 
-# apply the custom tracing function
-threading.settrace(custom_trace)
-
-
 class TestNormal(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.__default_trace = threading._trace_hook
+
+        # apply the custom tracing function
+        threading.settrace(custom_trace)
+
+    @classmethod
+    def tearDownClass(cls):
+        # reset to the default tracing function
+        threading.settrace(cls.__default_trace)
+
     def setUp(self):
         # reset everything before each test run
         BREAKPOINT.clear()
@@ -80,12 +88,25 @@ class TestNormal(unittest.TestCase):
         self.assertNotEqual(w1.singleton, w2.singleton)
 
 
-class Test(unittest.TestCase):
+class TestThread(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.__default_trace = threading._trace_hook
+
+        # apply the custom tracing function
+        threading.settrace(custom_trace)
+
+    @classmethod
+    def tearDownClass(cls):
+        # reset to the default tracing function
+        threading.settrace(cls.__default_trace)
+
     def setUp(self):
         # reset everything before each test run
         BREAKPOINT.clear()
-        global CONSTRUCTOR_CALL_SEMAPHORE
-        CONSTRUCTOR_CALL_SEMAPHORE = Semaphore(0)
+        with CONSTRUCTOR_CALL_SEMAPHORE._cond:
+            CONSTRUCTOR_CALL_SEMAPHORE._value = 0
+            CONSTRUCTOR_CALL_SEMAPHORE._cond.notify()
 
     def test_thread_singleton(self):
         # create two instances of a singleton
