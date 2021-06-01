@@ -1,5 +1,5 @@
-from simple_singleton.singleton import _SingletonMeta
-from simple_singleton.singleton_args import _SingletonArgsMeta
+from .singleton import _SingletonMeta
+from .singleton_args import _SingletonArgsMeta
 
 
 __all__ = ["Singleton", "SingletonArgs"]
