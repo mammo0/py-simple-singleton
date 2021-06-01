@@ -1,4 +1,4 @@
-class TestSingletonBase():
+class TSingletonBase():
     def __init__(self, arg1: str='', arg2: str='') -> None:
         self._param1 = arg1
         self._param2 = arg2

@@ -1,15 +1,15 @@
 from simple_singleton import SingletonArgs, ThreadSingletonArgs
-from tests.res import TestSingletonBase
+from tests.res import TSingletonBase
 
 
-class TestSingletonArgs(TestSingletonBase, metaclass=SingletonArgs):
+class TSingletonArgs(TSingletonBase, metaclass=SingletonArgs):
     pass
 
 
-class TestSingletonArgsWithoutInit(metaclass=SingletonArgs):
+class TSingletonArgsWithoutInit(metaclass=SingletonArgs):
     # no __init__ method in this class
     pass
 
 
-class TestThreadSingletonArgs(TestSingletonBase, metaclass=ThreadSingletonArgs):
+class TThreadSingletonArgs(TSingletonBase, metaclass=ThreadSingletonArgs):
     pass

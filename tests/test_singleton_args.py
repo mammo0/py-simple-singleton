@@ -1,15 +1,14 @@
 import unittest
 
-from tests.res.singleton_args_class import TestSingletonArgs, \
-    TestSingletonArgsWithoutInit
+from tests.res.singleton_args_class import TSingletonArgs, TSingletonArgsWithoutInit
 
 
 class Test(unittest.TestCase):
     def test_with_same_args(self):
         arg1 = "test_arg"
 
-        instance1 = TestSingletonArgs(arg1)
-        instance2 = TestSingletonArgs(arg1)
+        instance1 = TSingletonArgs(arg1)
+        instance2 = TSingletonArgs(arg1)
 
         # the instances must be equal
         self.assertEqual(instance1, instance2)
@@ -20,9 +19,9 @@ class Test(unittest.TestCase):
         arg1 = "first_arg"
         arg2 = "second_arg"
 
-        instance1 = TestSingletonArgs(arg1)
-        instance2 = TestSingletonArgs(arg2)
-        instance3 = TestSingletonArgs(arg1, arg2)
+        instance1 = TSingletonArgs(arg1)
+        instance2 = TSingletonArgs(arg2)
+        instance3 = TSingletonArgs(arg1, arg2)
 
         # the instances must not be equal
         self.assertNotEqual(instance1, instance2)
@@ -35,8 +34,8 @@ class Test(unittest.TestCase):
         self.assertEqual(instance2.param1, instance3.param2)
 
     def test_class_without_init(self):
-        instance1 = TestSingletonArgsWithoutInit()
-        instance2 = TestSingletonArgsWithoutInit()
+        instance1 = TSingletonArgsWithoutInit()
+        instance2 = TSingletonArgsWithoutInit()
 
         self.assertEqual(instance1, instance2)
 

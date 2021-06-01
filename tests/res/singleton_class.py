@@ -1,10 +1,10 @@
 from simple_singleton import Singleton, ThreadSingleton
-from tests.res import TestSingletonBase
+from tests.res import TSingletonBase
 
 
-class TestSingleton(TestSingletonBase, metaclass=Singleton):
+class TSingleton(TSingletonBase, metaclass=Singleton):
     pass
 
 
-class TestThreadSingleton(TestSingletonBase, metaclass=ThreadSingleton):
+class TThreadSingleton(TSingletonBase, metaclass=ThreadSingleton):
     pass

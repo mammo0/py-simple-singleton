@@ -4,10 +4,9 @@ from typing import Union, Any, Tuple, Dict
 import unittest
 
 from simple_singleton import Singleton, SingletonArgs
-from tests.res import TestSingletonBase
-from tests.res.singleton_args_class import TestSingletonArgs, \
-    TestThreadSingletonArgs
-from tests.res.singleton_class import TestThreadSingleton, TestSingleton
+from tests.res import TSingletonBase
+from tests.res.singleton_args_class import TSingletonArgs, TThreadSingletonArgs
+from tests.res.singleton_class import TThreadSingleton, TSingleton
 
 
 CONSTRUCTOR_CALL_SEMAPHORE: Semaphore = Semaphore(0)
@@ -15,9 +14,9 @@ BREAKPOINT: Event = Event()
 
 
 def custom_trace(frame, event, arg):
-    # set a 'breakpoint' when leaving the constructor of the TestSingletonBase class
+    # set a 'breakpoint' when leaving the constructor of the TSingletonBase class
     if (event == "return" and
-            frame.f_code == getattr(TestSingletonBase.__init__, "__code__")):
+            frame.f_code == getattr(TSingletonBase.__init__, "__code__")):
         CONSTRUCTOR_CALL_SEMAPHORE.release()
         # now wait
         BREAKPOINT.wait()
@@ -40,8 +39,8 @@ class TestNormal(unittest.TestCase):
 
     def test_normal_singleton(self):
         # create two instances of a singleton
-        w1: SingletonFactory = SingletonFactory(TestSingleton)
-        w2: SingletonFactory = SingletonFactory(TestSingleton)
+        w1: SingletonFactory = SingletonFactory(TSingleton)
+        w2: SingletonFactory = SingletonFactory(TSingleton)
         w1.start()
         w2.start()
 
@@ -61,8 +60,8 @@ class TestNormal(unittest.TestCase):
 
     def test_nomal_singletonargs(self):
         # create two instances of a singleton with same arguments
-        w1: SingletonFactory = SingletonFactory(TestSingletonArgs, "instance1")
-        w2: SingletonFactory = SingletonFactory(TestSingletonArgs, "instance1")
+        w1: SingletonFactory = SingletonFactory(TSingletonArgs, "instance1")
+        w2: SingletonFactory = SingletonFactory(TSingletonArgs, "instance1")
         w1.start()
         w2.start()
 
@@ -90,8 +89,8 @@ class Test(unittest.TestCase):
 
     def test_thread_singleton(self):
         # create two instances of a singleton
-        w1: SingletonFactory = SingletonFactory(TestThreadSingleton)
-        w2: SingletonFactory = SingletonFactory(TestThreadSingleton)
+        w1: SingletonFactory = SingletonFactory(TThreadSingleton)
+        w2: SingletonFactory = SingletonFactory(TThreadSingleton)
         w1.start()
         w2.start()
 
@@ -114,9 +113,9 @@ class Test(unittest.TestCase):
 
     def test_thread_singletonargs(self):
         # create two instances of a singleton with same arguments and one with a different argument
-        w1: SingletonFactory = SingletonFactory(TestThreadSingletonArgs, "instance1")
-        w2: SingletonFactory = SingletonFactory(TestThreadSingletonArgs, "instance1")
-        w3: SingletonFactory = SingletonFactory(TestThreadSingletonArgs, "instance2")
+        w1: SingletonFactory = SingletonFactory(TThreadSingletonArgs, "instance1")
+        w2: SingletonFactory = SingletonFactory(TThreadSingletonArgs, "instance1")
+        w3: SingletonFactory = SingletonFactory(TThreadSingletonArgs, "instance2")
         w1.start()
         w2.start()
         w3.start()
