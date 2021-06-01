@@ -3,6 +3,11 @@ from tests.res.singleton_class import TSingleton
 
 
 class Test(unittest.TestCase):
+    @classmethod
+    def tearDownClass(cls):
+        # reset the singleton classes (for further tests)
+        TSingleton._instance = None
+
     def test_basic(self):
         instance1 = TSingleton()
         instance2 = TSingleton()

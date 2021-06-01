@@ -4,6 +4,12 @@ from tests.res.singleton_args_class import TSingletonArgs, TSingletonArgsWithout
 
 
 class Test(unittest.TestCase):
+    @classmethod
+    def tearDownClass(cls):
+        # reset the singleton classes (for further tests)
+        TSingletonArgs._instances = {}
+        TSingletonArgsWithoutInit._instances = {}
+
     def test_with_same_args(self):
         arg1 = "test_arg"
 

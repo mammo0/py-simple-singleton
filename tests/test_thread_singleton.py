@@ -38,6 +38,10 @@ class TestNormal(unittest.TestCase):
         # reset to the default tracing function
         threading.settrace(cls.__default_trace)
 
+        # reset the singleton classes (for further tests)
+        TSingleton._instance = None
+        TSingletonArgs._instances = {}
+
     def setUp(self):
         # reset everything before each test run
         BREAKPOINT.clear()
@@ -100,6 +104,10 @@ class TestThread(unittest.TestCase):
     def tearDownClass(cls):
         # reset to the default tracing function
         threading.settrace(cls.__default_trace)
+
+        # reset the singleton classes (for further tests)
+        TThreadSingleton._instance = None
+        TThreadSingletonArgs._instances = {}
 
     def setUp(self):
         # reset everything before each test run
