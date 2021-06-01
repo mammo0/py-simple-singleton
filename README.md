@@ -60,3 +60,15 @@ assert instance1 == instance3  # True
 
 print(instance2.param)         # "different_value"
 ```
+
+
+### Usage in multi-threaded environments
+
+**The `Singleton` and `SingletonArgs` meta classes are not thread-safe!**
+
+To use them in a multi-threaded environment, please use the
+
+- `ThreadSingleton` and
+- `ThreadSingletonArgs`
+
+meta classes. They can be used exactly like the standard meta classes.
