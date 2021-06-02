@@ -1,7 +1,6 @@
-from simple_singleton.singleton import _SingletonMeta
-from simple_singleton.singleton_args import _SingletonArgsMeta
-from simple_singleton.thread_singleton import _ThreadSingletonMeta, \
-    _ThreadSingletonArgsMeta
+from .singleton import _SingletonMeta
+from .singleton_args import _SingletonArgsMeta
+from .thread_singleton import _ThreadSingletonMeta, _ThreadSingletonArgsMeta
 
 
 __all__ = ["Singleton", "ThreadSingleton", "SingletonArgs", "ThreadSingletonArgs"]

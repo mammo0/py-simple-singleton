@@ -4,8 +4,8 @@ thanks to TonyDiana for the idea (https://github.com/mammo0/py-simple-singleton/
 """
 from threading import Lock
 
-from simple_singleton.singleton import _SingletonMeta
-from simple_singleton.singleton_args import _SingletonArgsMeta
+from .singleton import _SingletonMeta
+from .singleton_args import _SingletonArgsMeta
 
 
 class _ThreadSafeMixin(type):
