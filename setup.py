@@ -45,6 +45,9 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/mammo0/py-simple-singleton",
     packages=["simple_singleton"],
+    package_data={
+        'simple_singleton': ['py.typed'],
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
