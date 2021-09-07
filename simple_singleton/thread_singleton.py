@@ -4,9 +4,6 @@ thanks to TonyDiana for the idea (https://github.com/mammo0/py-simple-singleton/
 """
 from threading import Lock
 
-from .singleton import _SingletonMeta
-from .singleton_args import _SingletonArgsMeta
-
 
 class _ThreadSafeMixin(type):
     def __init__(cls, name: str, bases: tuple, dct: dict):
@@ -19,11 +16,3 @@ class _ThreadSafeMixin(type):
         # use the lock
         with cls._lock:
             return super(_ThreadSafeMixin, cls).__call__(*args, **kwargs)
-
-
-class _ThreadSingletonMeta(_ThreadSafeMixin, _SingletonMeta):
-    pass
-
-
-class _ThreadSingletonArgsMeta(_ThreadSafeMixin, _SingletonArgsMeta):
-    pass
