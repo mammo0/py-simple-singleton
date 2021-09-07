@@ -4,19 +4,19 @@ from tests.res.singleton_class import TSingleton
 
 class Test(unittest.TestCase):
     @classmethod
-    def tearDownClass(cls):
+    def tearDownClass(cls) -> None:
         # reset the singleton classes (for further tests)
         TSingleton._instance = None
 
-    def test_basic(self):
-        instance1 = TSingleton()
-        instance2 = TSingleton()
+    def test_basic(self) -> None:
+        instance1: TSingleton = TSingleton()
+        instance2: TSingleton = TSingleton()
 
         self.assertEqual(instance1, instance2)
 
-    def test_different_args(self):
-        instance1 = TSingleton("first_instance")
-        instance2 = TSingleton("second_instance")
+    def test_different_args(self) -> None:
+        instance1: TSingleton = TSingleton("first_instance")
+        instance2: TSingleton = TSingleton("second_instance")
 
         # the instances must be equal
         self.assertEqual(instance1, instance2)

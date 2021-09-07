@@ -1,10 +1,10 @@
 class TSingletonBase():
     def __init__(self, arg1: str='', arg2: str='') -> None:
-        self._param1 = arg1
-        self._param2 = arg2
+        self._param1: str = arg1
+        self._param2: str = arg2
 
     @property
-    def param1(self):
+    def param1(self) -> str:
         return self._param1
 
     @param1.setter
@@ -12,7 +12,7 @@ class TSingletonBase():
         self._param1 = value
 
     @property
-    def param2(self):
+    def param2(self) -> str:
         return self._param2
 
     @param2.setter
