@@ -2,19 +2,19 @@
 Simple singelton pattern for python.
 thanks to wowkin2 (https://gist.github.com/wowkin2/3af15bfbf197a14a2b0b2488a1e8c787)
 """
+from typing import Optional, TypeVar, Generic
 
 
-class _SingletonMeta(type):
+T = TypeVar("T", bound="_SingletonMeta")
+
+
+class _SingletonMeta(type, Generic[T]):
     """
     Simple Singleton that keep only one value for all instances.
     """
-    def __init__(cls, name: str, bases: tuple, dct: dict):
-        super(_SingletonMeta, cls).__init__(name, bases, dct)
+    _instance: Optional[T] = None
 
-        # this variable holds the singleton instance
-        cls._instance = None
-
-    def __call__(cls, *args, **kwargs):
+    def __call__(cls: T, *args, **kwargs) -> T:
         # check if there's already an instance
         if cls._instance is None:
             # if not create one

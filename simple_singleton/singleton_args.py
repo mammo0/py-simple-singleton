@@ -2,33 +2,35 @@
 Simple singelton pattern for python.
 thanks to wowkin2 (https://gist.github.com/wowkin2/3af15bfbf197a14a2b0b2488a1e8c787)
 """
-
-
 import inspect
+from typing import Dict, Callable, Union, Any, List, FrozenSet, Tuple, TypeVar, Generic
 
 
-class _SingletonArgsMeta(type):
+T = TypeVar("T", bound="_SingletonArgsMeta")
+
+
+class _SingletonArgsMeta(type, Generic[T]):
     """
     Singleton that keep single instance for single set of arguments.
     """
-    _instances = {}
-    _init = {}
+    _instances: Dict[int, T] = {}
+    _init: Dict[T, Callable] = {}
 
-    def __init__(cls, name: str, bases: tuple, dct: dict):
+    def __init__(cls: T, name: str, bases: tuple, dct: dict) -> None:
         super(_SingletonArgsMeta, cls).__init__(name, bases, dct)
 
         # save the __init__ method of each class that uses this singleton
         # required in __call__ method below
         cls._init[cls] = getattr(cls, "__init__")
 
-    def __call__(cls, *args, **kwargs):
+    def __call__(cls: T, *args, **kwargs) -> T:
         # get the individual calling signature of the __init__ method for this class
-        init_callargs = inspect.getcallargs(cls._init[cls], None, *args, **kwargs)
+        init_callargs: Dict[str, Any] = inspect.getcallargs(cls._init[cls], None, *args, **kwargs)
 
         # create a key
-        key = hash(
+        key: int = hash(
             # the individual key is this class combined with the signature above
-            (cls, cls.__freeze_dict(init_callargs))
+            (cls, cls.__freeze(init_callargs))
         )
 
         # check if there's already an instance that has the same __init__ signature
@@ -38,14 +40,14 @@ class _SingletonArgsMeta(type):
 
         return cls._instances[key]
 
-    def __freeze_dict(cls, dct: dict) -> frozenset:
+    def __freeze(cls, set_obj: Union[Dict[Any, Any], List[Any], Tuple[Any]]) -> Union[FrozenSet[Any], Tuple[Any], Any]:
         """
         Recursively transform a dictionary to a frozenset. This can be hashed.
-        @param dct: The dictionary that should be converted.
+        @param set_obj: The dictionary that should be converted.
         @return: A frozenset from the above dictionary.
         """
-        if isinstance(dct, dict):
-            return frozenset((key, cls.__freeze_dict(value)) for key, value in dct.items())
-        elif isinstance(dct, list):
-            return tuple(cls.__freeze_dict(value) for value in dct)
-        return dct
+        if isinstance(set_obj, dict):
+            return frozenset((key, cls.__freeze(value)) for key, value in set_obj.items())
+        elif isinstance(set_obj, list):
+            return tuple(cls.__freeze(value) for value in set_obj)
+        return set_obj
