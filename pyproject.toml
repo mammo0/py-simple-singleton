@@ -21,7 +21,7 @@ mypy = "^0.971"
 [tool.poetry-dynamic-versioning]
 enable = true
 vcs = "git"
-#style = "semver"
+style = "semver"
 metadata = false
 
 [build-system]
