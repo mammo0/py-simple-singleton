@@ -1,6 +1,6 @@
 from .singleton import _SingletonMeta
 from .singleton_args import _SingletonArgsMeta
-from simple_singleton.thread_singleton import _ThreadSafeMixin
+from .thread_singleton import _ThreadSafeMixin
 
 
 __all__ = ["Singleton", "ThreadSingleton", "SingletonArgs", "ThreadSingletonArgs"]
