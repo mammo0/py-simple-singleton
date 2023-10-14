@@ -7,7 +7,7 @@ from threading import Lock
 
 class _ThreadSafeMixin(type):
     def __init__(cls, name: str, bases: tuple, dct: dict):
-        super(_ThreadSafeMixin, cls).__init__(name, bases, dct)
+        super().__init__(name, bases, dct)
 
         # add a lock for thread safety
         cls._lock: Lock = Lock()
@@ -15,4 +15,4 @@ class _ThreadSafeMixin(type):
     def __call__(cls, *args, **kwargs):
         # use the lock
         with cls._lock:
-            return super(_ThreadSafeMixin, cls).__call__(*args, **kwargs)
+            return super().__call__(*args, **kwargs)
