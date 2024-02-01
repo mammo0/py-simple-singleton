@@ -51,9 +51,8 @@ jobs:
             python-version: "3.7"
         - name: Set up Poetry
           uses: abatilo/actions-poetry@v3
-        - name: Add dynamic versioning plugin
-          run: |
-            poetry self add "poetry-dynamic-versioning[plugin]"
+          with:
+            poetry-plugins: "poetry-dynamic-versioning[plugin]"
         # build the package
         - name: Build package
           run: |
