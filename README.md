@@ -20,11 +20,11 @@ Otherwise the module can be downloaded from PyPI: https://pypi.org/project/simpl
 
 1. Import the module:
    ```python
-   from simple_signleton import Singleton
+   from simple_singleton import Singleton
    ```
    or:
    ```python
-   from simple_signleton import SingletonArgs
+   from simple_singleton import SingletonArgs
    ```
 2. Create a class that uses one of the above meta classes:
    ```python
