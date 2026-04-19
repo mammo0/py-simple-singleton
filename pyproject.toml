@@ -1,21 +1,30 @@
-[tool.poetry]
+[project]
 name = "simple-singleton"
-version = "0.0.0"
+dynamic = [ "version" ]
 description = "Simple way to create a singleton class."
 readme = "README.md"
 license = "GPL-3.0-only"
-authors = ["Marc Ammon <marc.ammon@hotmail.de>"]
-homepage = "https://github.com/mammo0/py-simple-singleton"
+authors = [
+    { name = "Marc Ammon", email = "marc.ammon@hotmail.de" }
+]
 classifiers = [
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Operating System :: OS Independent"
 ]
+requires-python = ">=3.10"
 
-[tool.poetry.dependencies]
-python = ">=3.8"
+[project.urls]
+homepage = "https://github.com/mammo0/py-simple-singleton"
 
-[tool.poetry.dev-dependencies]
-pytest = "^8.3.5"
+
+[tool.poetry]
+version = "0.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=9.0.0"
+
+[tool.poetry.requires-plugins]
+poetry-dynamic-versioning = { version = ">=1.0.0,<2.0.0", extras = ["plugin"] }
 
 [tool.poetry-dynamic-versioning]
 enable = true
@@ -23,6 +32,7 @@ vcs = "git"
 style = "semver"
 metadata = false
 
+
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+requires = ["poetry-core>=2.0.0,<3.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
 build-backend = "poetry_dynamic_versioning.backend"
